@@ -1,8 +1,3 @@
-import { router } from './trpc';
+import { appRouter } from './appRouter';
  
-export const appRouter = router({
-
-});
- 
-
 export type AppRouter = typeof appRouter;
