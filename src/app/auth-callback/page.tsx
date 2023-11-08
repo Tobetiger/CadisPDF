@@ -1,6 +1,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
 
-const page = async () => {
+const Page = async () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const origin = searchParams.get("origin");
@@ -8,4 +8,4 @@ const page = async () => {
   const data = await apiResponse.json();
 };
 
-export default page;
+export default Page;
