@@ -6,7 +6,14 @@ const Page = async () => {
   const searchParams = useSearchParams();
   const origin = searchParams.get("origin");
 
-  const { data, isLoading } = trpc.test.useQuery();
+  const { data, isLoading } = trpc.authCallback.useQuery(undefined, {
+    onSuccess: ({ success }) => {
+      if (success) {
+        // if user is synced to our database
+        router.push(origin ? `/${origin}` : `/dashboard`);
+      }
+    },
+  });
 };
 
 export default Page;
