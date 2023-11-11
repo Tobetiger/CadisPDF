@@ -27,7 +27,7 @@ const Page = () => {
       <div className="flex flex-col items-center gap-2">
         <Loader2 className="h-8 w-8 animate-spin text-zinc-800" />
         <h3 className="font-semibold text-xl">
-          Please wait Cadis is setting up your account
+          Cadis is setting up your account
         </h3>
         <p>You will be redirected, Automatically</p>
       </div>

@@ -4,7 +4,7 @@ import { TRPCError } from '@trpc/server';
 import { db } from '@/db';
  
 export const appRouter = router({
-authCallback: publicProcedure.query(async ()=> {
+authCallback: publicProcedure.query(async () => {
   const {getUser} = getKindeServerSession()
   const user = await getUser()
 
@@ -20,7 +20,12 @@ const dbUser = await db.user.findFirst({
  )
  if(!dbUser) {
 //create user in database
-
+await db.user.create({
+  data: {
+    id: user.id,
+    email: user.email
+  }
+ })
  }
 return { success: true }
  

@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 const NavBar = () => {
   return (
-    <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 bg-blur-lg transition-all pt-4">
+    <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white bg-blur-lg transition-all pt-4">
       <MaxWidthWrapper>
         <div className="flex h-4 item-center justify-between">
           <Link href="/" className="flex z-40 font-semibold">
