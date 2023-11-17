@@ -11,7 +11,7 @@ const NavBar = () => {
       <MaxWidthWrapper>
         <div className="flex h-4 item-center justify-between">
           <Link href="/" className="flex z-40 font-semibold">
-            <span>Cadis.</span>
+            <span>CadisPDF.</span>
           </Link>
           {/* Todo Mobile NavBar */}
           <div className="hidden items-center space-x-4 sm:flex">

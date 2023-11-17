@@ -8,7 +8,7 @@ import Providers from "@/components/providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CadisPDF",
+  title: "Chat With Your PDF Files and Documents For Free",
   description: "Chat with your PDF",
 };
 
