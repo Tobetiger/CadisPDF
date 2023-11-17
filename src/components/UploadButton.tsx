@@ -18,7 +18,7 @@ const UploadButton = () => {
       <DialogTrigger onClick={() => setIsOpen(true)} asChild>
         <Button>Upload PDF</Button>
       </DialogTrigger>
-      <DialogContent>Upload</DialogContent>
+      <DialogContent>Upload PDF File</DialogContent>
     </Dialog>
   );
 };

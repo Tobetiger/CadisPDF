@@ -24,9 +24,9 @@ export default function Home() {
             className: "mt-4",
           })}
           href="/dashboard"
-          target="_blank"
         >
-          Get Started <ArrowRight className="ml-2 h-5 w-5" />
+          Get Started For Free
+          <ArrowRight className="ml-2 h-5 w-5" />
         </Link>
       </MaxWidthWrapper>
 
@@ -93,7 +93,9 @@ export default function Home() {
         <ol className="my-8 space-y-4 pt-8 md:flex md:space-x-12 md:space-y-0">
           <li className="md:flex-1">
             <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
-              <span className="text-md font-medium text-amber-600">Step 1</span>
+              <span className="text-md font-medium text-purple-600">
+                Step 1
+              </span>
               <span className="text-xl font-semibold">
                 Sign up for an account
               </span>
@@ -111,7 +113,9 @@ export default function Home() {
           </li>
           <li className="md:flex-1">
             <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
-              <span className="text-md font-medium text-amber-600">Step 2</span>
+              <span className="text-md font-medium text-purple-600">
+                Step 2
+              </span>
               <span className="text-xl font-semibold">Upload any PDF file</span>
               <span className="mt-2 text-zinc-700">
                 Cadis will Process you PDF files and make it ready for you to
@@ -121,7 +125,9 @@ export default function Home() {
           </li>
           <li className="md:flex-1">
             <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
-              <span className="text-md font-medium text-amber-600">Step 3</span>
+              <span className="text-md font-medium text-purple-600">
+                Step 3
+              </span>
               <span className="text-xl font-semibold">
                 Start asking you PDF Questions
               </span>
