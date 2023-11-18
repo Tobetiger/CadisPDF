@@ -6,10 +6,17 @@ import { Button } from "./ui/button";
 import Dropzone from "react-dropzone";
 import { Cloud, File } from "lucide-react";
 import { Progress } from "./ui/progress";
+import { useUploadThing } from "@/lib/uploadthing";
+import { useToast } from "./ui/use-toast";
+import { Description } from "@radix-ui/react-toast";
 
 const UploadDropzone = () => {
   const [isUploading, setIsUploading] = useState<boolean>(true);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
+
+  const { startUpload } = useUploadThing("pdfUploader");
+
+  const { toast } = useToast();
 
   const startSimulatedProgress = () => {
     setUploadProgress(0);
@@ -36,6 +43,16 @@ const UploadDropzone = () => {
         const progressInterval = startSimulatedProgress();
 
         // Handle File Uploading
+
+        const res = await startUpload(acceptedFile);
+
+        if (!res) {
+          return toast({
+            title: "Something went wrong",
+            description: "Please try again later",
+            variant: "destructive",
+          });
+        }
         await new Promise((resolve) => setTimeout(resolve, 1500));
         clearInterval(progressInterval);
         setUploadProgress(100);
