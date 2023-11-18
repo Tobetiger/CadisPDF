@@ -14,7 +14,7 @@ const NavBar = () => {
             href="/"
             className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
           >
-            <img src="/" className="h-8" alt="CadisPDF" />
+            <img src="/" className="h-8" alt="" />
             <span className="self-center text-2xl font-bold whitespace-nowrap dark:text-white">
               Cadis<span className="text-purple-800 font-bold">PDF</span>
             </span>
