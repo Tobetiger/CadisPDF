@@ -14,7 +14,7 @@ const NavBar = () => {
             href="/"
             className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
           >
-            <img src="/" className="h-8" alt="" />
+            <img src="/cadis1.png" className="h-12" alt="/" />
             <span className="self-center text-2xl font-bold whitespace-nowrap dark:text-white">
               Cadis<span className="text-purple-800 font-bold">PDF</span>
             </span>
@@ -26,6 +26,7 @@ const NavBar = () => {
                 href="/pricing"
                 className={buttonVariants({
                   variant: "ghost",
+                  className: "hover:bg-purple-200",
                   size: "sm",
                 })}
               >
@@ -36,6 +37,7 @@ const NavBar = () => {
                 className={buttonVariants({
                   variant: "ghost",
                   size: "sm",
+                  className: "hover:bg-purple-200",
                 })}
               >
                 Sign in

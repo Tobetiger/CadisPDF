@@ -2,19 +2,32 @@
 
 import React, { useState } from "react";
 import { Dialog, DialogTrigger, DialogContent } from "./ui/dialog";
-import { Button } from "./ui/button";
+
 import Dropzone from "react-dropzone";
 import { Cloud, File } from "lucide-react";
 import { Progress } from "./ui/progress";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useToast } from "./ui/use-toast";
-import { Description } from "@radix-ui/react-toast";
+
+import { trpc } from "@/app/_trpc/client";
+import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
 
 const UploadDropzone = () => {
+  const router = useRouter();
+
   const [isUploading, setIsUploading] = useState<boolean>(true);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
 
   const { startUpload } = useUploadThing("pdfUploader");
+
+  const { mutate: startPolling } = trpc.getFile.useMutation({
+    onSuccess: (file) => {
+      router.push(`/dashboard/${file.id}`);
+    },
+    retry: true,
+    retryDelay: 500,
+  });
 
   const { toast } = useToast();
 
@@ -53,9 +66,24 @@ const UploadDropzone = () => {
             variant: "destructive",
           });
         }
+
+        const [fileResponse] = res;
+
+        const key = fileResponse?.key;
+
+        if (!key) {
+          return toast({
+            title: "Something went wrong",
+            description: "Please try again later",
+            variant: "destructive",
+          });
+        }
+
         await new Promise((resolve) => setTimeout(resolve, 1500));
         clearInterval(progressInterval);
         setUploadProgress(100);
+
+        startPolling({ key });
       }}
     >
       {({ getRootProps, getInputProps, acceptedFiles }) => (
@@ -96,6 +124,13 @@ const UploadDropzone = () => {
                   />
                 </div>
               ) : null}
+
+              <input
+                {...getInputProps()}
+                type="file"
+                id="dropzone-file"
+                className="hidden"
+              />
             </label>
           </div>
         </div>
@@ -116,7 +151,7 @@ const UploadButton = () => {
       }}
     >
       <DialogTrigger onClick={() => setIsOpen(true)} asChild>
-        <Button className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+        <Button className="w-full lg:w-4 h-10 px-16 mb-3 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-center">
           Upload PDF
         </Button>
       </DialogTrigger>

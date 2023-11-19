@@ -38,8 +38,13 @@ const Dashboard = () => {
 
   return (
     <main className="mx-auto max-w-7xl md:p-10">
-      <div className="mt-8 flex flex-col items-start justify-between gap-4 borber-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-1 mx-4">
-        <h1 className="mb-3 font-bold text-5xl text-gray-900">All Files</h1>
+      <div className="mt-2 flex flex-col items-start justify-between gap-4 borber-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-1 mx-4">
+        <div>
+          <h1 className="mb-3 font-bold text-5xl text-gray-900">Dashboard</h1>
+          <h2 className="mb-3 font-mono text-gray-900">
+            View all your PDF file history
+          </h2>
+        </div>
         <UploadButton />
       </div>
       <hr />
