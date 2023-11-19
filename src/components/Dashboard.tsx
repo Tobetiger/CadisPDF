@@ -11,7 +11,7 @@ import {
   Trash,
 } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
-import { Key, useState } from "react";
+import { useState } from "react";
 import { format } from "date-fns";
 import { Button } from "./ui/button";
 
@@ -55,71 +55,62 @@ const Dashboard = () => {
           <ul className="mt-8 grid grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-2 lg:grid-cols-3">
             {files
               .sort(
-                (
-                  a: { createdAt: string | number | Date },
-                  b: { createdAt: string | number | Date }
-                ) =>
+                (a, b) =>
                   new Date(b.createdAt).getTime() -
                   new Date(a.createdAt).getTime()
               )
-              .map(
-                (file: {
-                  name: string;
-                  createdAt: string | number | Date;
-                  id: Key | null | undefined;
-                }) => {
-                  <li
-                    key={file.id}
-                    className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow hover:shadow-lg transition"
+              .map((file) => (
+                <li
+                  key={file.id}
+                  className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow hover:shadow-lg transition"
+                >
+                  <Link
+                    href={`/dashboard/${file.id}`}
+                    className="flex flex-col gap-2"
                   >
-                    <Link
-                      href={`/dashboard/${file.id}`}
-                      className="flex flex-col gap-2"
-                    >
-                      <div className="pt-6 px-6 w-full items-center justify-between space-x-6">
-                        <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-r from-violet-400 to-purple-500"></div>
-                        <div className="flex-1 truncate">
-                          <div className="flex items-center space-x-3">
-                            <h3 className="truncate text-lg font-medium text-zinc-900">
-                              {file.name}
-                            </h3>
-                          </div>
+                    <div className="pt-6 px-6 w-full items-center justify-between space-x-6">
+                      <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-r from-violet-400 to-purple-500"></div>
+                      <div className="flex-1 truncate">
+                        <div className="flex items-center space-x-3">
+                          <h3 className="truncate text-lg font-medium text-zinc-900">
+                            {file.name}
+                          </h3>
                         </div>
                       </div>
-                    </Link>
-
-                    <div className="px-6 mx-4 grid grid-cols-3 place-items-center py-2 text-xs text-zinc-500 gap-6">
-                      <div className="flex items-center gap-2">
-                        <Plus className="h-4 w-4" />
-                        {format(new Date(file.createdAt), "MMM yyy")}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <MessageSquare className="h-4 w-4" />
-                        Mocked
-                      </div>
-                      <Button
-                        onClick={() =>
-                          deleteFile({
-                            id: file.id,
-                          })
-                        }
-                        size="sm"
-                        className="w-full hover:bg-red-400"
-                        variant="destructive"
-                      >
-                        {currentlyDeletingFile === file.id ? (
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                        ) : (
-                          <Trash className="h-4 w-4" />
-                        )}
-                      </Button>
                     </div>
-                  </li>;
-                }
-              )}
+                  </Link>
+
+                  <div className="px-6 mx-4 grid grid-cols-3 place-items-center py-2 text-xs text-zinc-500 gap-6">
+                    <div className="flex items-center gap-2">
+                      <Plus className="h-4 w-4" />
+                      {format(new Date(file.createdAt), "MMM yyy")}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MessageSquare className="h-4 w-4" />
+                      Mocked
+                    </div>
+                    <Button
+                      onClick={() =>
+                        deleteFile({
+                          id: file.id,
+                        })
+                      }
+                      size="sm"
+                      className="w-full hover:bg-red-400"
+                      variant="destructive"
+                    >
+                      {currentlyDeletingFile === file.id ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <Trash className="h-4 w-4" />
+                      )}
+                    </Button>
+                  </div>
+                </li>
+              ))}
           </ul>
         ) : isLoading ? (
-          <Skeleton height={100} count={3} className="my-2" />
+          <Skeleton height={100} count={4} className="my-2" />
         ) : (
           <div className="mt-16 flex flex-col items-center gap-2">
             <GhostIcon className="h-8 w-8 text-zinc-800" />
