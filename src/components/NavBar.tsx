@@ -7,11 +7,17 @@ import { ArrowRight } from "lucide-react";
 
 const NavBar = () => {
   return (
-    <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white bg-blur-lg transition-all pt-4">
+    <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-300 bg-white bg-blur-lg transition-all pt-4">
       <MaxWidthWrapper>
         <div className="flex h-4 item-center justify-between">
-          <Link href="/" className="flex z-40 font-semibold">
-            <span>CadisPDF.</span>
+          <Link
+            href="/"
+            className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
+          >
+            <img src="/cadis1.png" className="h-12" alt="/" />
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              Cadis<span className="text-purple-800 font-bold">PDF</span>
+            </span>
           </Link>
           {/* Todo Mobile NavBar */}
           <div className="hidden items-center space-x-4 sm:flex">
@@ -20,6 +26,7 @@ const NavBar = () => {
                 href="/pricing"
                 className={buttonVariants({
                   variant: "ghost",
+                  className: "hover:bg-purple-200",
                   size: "sm",
                 })}
               >
@@ -30,6 +37,7 @@ const NavBar = () => {
                 className={buttonVariants({
                   variant: "ghost",
                   size: "sm",
+                  className: "hover:bg-purple-200",
                 })}
               >
                 Sign in

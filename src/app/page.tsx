@@ -1,9 +1,10 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
 import Statusbar from "@/components/Statusbar";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -16,10 +17,10 @@ export default function Home() {
           <span className="text-amber-500 border-black">Documents </span>
         </h1>
         <p className="mt-5 max-w-prose text-zinc-700 sm:text-md">
-          Cadis Allows You To Communicate and Interact with Your Files and
-          Documents. Simply Upload Your PDF File and Start chatting with
-          Document.
+          Cadis Allows You To Communicate with Your Files and Documents. Simply
+          Upload Your PDF File and Start chatting with Document.
         </p>
+
         <Link
           className={buttonVariants({
             size: "lg",
@@ -156,6 +157,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
