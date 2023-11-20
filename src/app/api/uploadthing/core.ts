@@ -10,9 +10,9 @@ export const ourFileRouter = {
    
     .middleware(async ({ req }) => {
      
-      const {getUser} = getKindeServerSession()
+      const { getUser } = getKindeServerSession()
 
-      const user = await getUser()
+      const user = getUser()
      
       if(!user || !user.id) throw new Error("unauthorized")
       return {userId: user.id };

@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Dialog, DialogTrigger, DialogContent } from "./ui/dialog";
 
 import Dropzone from "react-dropzone";
-import { Cloud, File } from "lucide-react";
+import { Cloud, File, Loader2 } from "lucide-react";
 import { Progress } from "./ui/progress";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useToast } from "./ui/use-toast";
@@ -16,7 +16,7 @@ import { Button } from "./ui/button";
 const UploadDropzone = () => {
   const router = useRouter();
 
-  const [isUploading, setIsUploading] = useState<boolean>(true);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
 
   const { startUpload } = useUploadThing("pdfUploader");
@@ -26,7 +26,7 @@ const UploadDropzone = () => {
       router.push(`/dashboard/${file.id}`);
     },
     retry: true,
-    retryDelay: 500,
+    retryDelay: 10000,
   });
 
   const { toast } = useToast();
@@ -122,6 +122,12 @@ const UploadDropzone = () => {
                     value={uploadProgress}
                     className="h-1 w-full bg-zinc-200"
                   />
+                  {uploadProgress === 100 ? (
+                    <div className="flex gap-1 items-center justify-center text-sm text-zinc-700 text-center pt-2">
+                      <Loader2 className="h-3 w-3 animate-spin" />
+                      Redirecting...
+                    </div>
+                  ) : null}
                 </div>
               ) : null}
 

@@ -4,9 +4,11 @@ import { TRPCError } from '@trpc/server';
 import { db } from '@/db';
 import { z } from 'zod';
 
+
 export const appRouter = router({
 authCallback: publicProcedure.query(async () => {
   const {getUser} = getKindeServerSession()
+  
   const user = getUser()
 
   if (!user.id || !user.email)
@@ -38,7 +40,7 @@ getUserFiles: privateProcedure.query(async ({ ctx }) => {
 
   return await db.file.findMany({
     where: {
-      userId,
+      userId
     }
   })
 }),
