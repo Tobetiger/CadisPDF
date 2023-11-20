@@ -9,7 +9,7 @@ KINDE_POST_LOGIN_REDIRECT_URL=http://localhost:3000/dashboard
 
 
 
-DATABASE_URL='mysql://wef48mzbovrquby0te4u:pscale_@aws.connect.psdb.cloud/cadispdf?sslaccept=strict'
+DATABASE_URL='mysql://:pscale_@aws.connect.psdb.cloud/cadispdf?sslaccept=strict'
 
 
 UPLOADTHING_SECRET=sk_
