@@ -10,7 +10,7 @@ export const ourFileRouter = {
    
     .middleware(async ({ req }) => {
      
-      const {getUser} = getKindeServerSession()
+      const { getUser } = getKindeServerSession()
 
       const user = await getUser()
      
