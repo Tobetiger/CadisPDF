@@ -9,7 +9,7 @@ export const appRouter = router({
 authCallback: publicProcedure.query(async () => {
   const {getUser} = getKindeServerSession()
   
-  const {user} = await getUser()
+  const user = getUser()
 
   if (!user.id || !user.email)
   throw new TRPCError({ code: 'UNAUTHORIZED'})
@@ -40,7 +40,7 @@ getUserFiles: privateProcedure.query(async ({ ctx }) => {
 
   return await db.file.findMany({
     where: {
-      userId,
+      userId
     }
   })
 }),

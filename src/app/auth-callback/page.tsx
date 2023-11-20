@@ -3,14 +3,16 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { trpc } from "../_trpc/client";
 import { Loader2 } from "lucide-react";
+import { useRef, useState } from "react";
 
 const Page = () => {
   const router = useRouter();
-
+  const retry = useRef(0);
+  const maxRetryCount = 5;
   const searchParams = useSearchParams();
   const origin = searchParams.get("origin");
 
-  trpc.authCallback.useQuery(undefined, {
+  const { refetch } = trpc.authCallback.useQuery(undefined, {
     onSuccess: ({ success }) => {
       if (success) {
         // user is synced to db
@@ -18,11 +20,21 @@ const Page = () => {
       }
     },
     onError: (err) => {
+      console.log(err);
       if (err.data?.code === "UNAUTHORIZED") {
-        router.push("/sign-in");
+        retry.current = retry.current + 1;
+        if (retry.current <= maxRetryCount) {
+          // Retry up to maxRetryCount
+          setTimeout(() => {
+            refetch();
+          }, 500);
+        } else {
+          router.push("/sign-in");
+        }
       }
     },
-    retry: true,
+
+    retry: false,
     retryDelay: 500,
   });
 
