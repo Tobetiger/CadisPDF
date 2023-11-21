@@ -2,18 +2,12 @@
 
 import { trpc } from "@/app/_trpc/client";
 import UploadButton from "./UploadButton";
-import {
-  GhostIcon,
-  Link,
-  Loader2,
-  MessageSquare,
-  Plus,
-  Trash,
-} from "lucide-react";
+import { GhostIcon, Loader2, MessageSquare, Plus, Trash } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import { useState } from "react";
 import { format } from "date-fns";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 const Dashboard = () => {
   const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<
@@ -69,7 +63,7 @@ const Dashboard = () => {
                     className="flex flex-col gap-2"
                   >
                     <div className="pt-6 px-6 flex w-full items-center justify-between space-x-6">
-                      <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500" />
+                      <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-r from-purple-500 to-blue-400" />
                       <div className="flex-1 truncate">
                         <div className="flex items-center space-x-3">
                           <h3 className="truncate text-lg font-medium text-zinc-900">
