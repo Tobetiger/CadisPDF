@@ -4,23 +4,54 @@ import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
 import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 
-import "react-pdf/dist/Page/AnnotationLayer.css";
-import "react-pdf/dist/Page/TextLayer.css";
 import { useToast } from "./ui/use-toast";
 import { useResizeDetector } from "react-resize-detector";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import "react-pdf/dist/Page/AnnotationLayer.css";
+import "react-pdf/dist/Page/TextLayer.css";
+import { z } from "zod";
+
+import { cn } from "@/lib/utils";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 interface PdfRendererProps {
-  url: String;
+  url: string;
 }
 
 const PdfRenderer = ({ url }: PdfRendererProps) => {
   const [numPages, setNumPages] = useState<number>();
   const [curPage, setCurPage] = useState(1);
   const { toast } = useToast();
+
+  const CustomPageValidator = z.object({
+    page: z
+      .string()
+      .refine((num) => Number(num) > 0 && Number(num) <= numPages!),
+  });
+
+  type TCustomPageValidator = z.infer<typeof CustomPageValidator>;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<TCustomPageValidator>({
+    defaultValues: {
+      page: "1",
+    },
+    resolver: zodResolver(CustomPageValidator),
+  });
+
+  const handlePageSubmit = ({ page }: TCustomPageValidator) => {
+    setCurPage(Number(page));
+    setValue("page", String(page));
+  };
 
   const { width, ref } = useResizeDetector();
 
@@ -39,13 +70,6 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
           >
             <ChevronDown className="h-4 w-4" />
           </Button>
-          <div className="flex items-center gap-1.5">
-            <Input className="w-12 h-8" />
-            <p className="text-zinc-700 text-sm space-x-1">
-              <span>/</span>
-              <span>{numPages ?? "Loading..."}</span>
-            </p>
-          </div>
           <Button
             disabled={numPages === undefined || curPage === numPages}
             onClick={() => {
@@ -59,6 +83,24 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
           >
             <ChevronUp className="h-4 w-4" />
           </Button>
+          <div className="flex items-center gap-1.5">
+            <Input
+              {...register("page")}
+              className={cn(
+                "w-12 h-8",
+                errors.page && "focus-visible:ring-red-500"
+              )}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmit(handlePageSubmit)();
+                }
+              }}
+            />
+            <p className="text-zinc-700 text-sm space-x-1">
+              <span>/</span>
+              <span>{numPages ?? "Loading..."}</span>
+            </p>
+          </div>
         </div>
       </div>
 

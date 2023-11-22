@@ -2,7 +2,14 @@
 
 import { trpc } from "@/app/_trpc/client";
 import UploadButton from "./UploadButton";
-import { GhostIcon, Loader2, MessageSquare, Plus, Trash } from "lucide-react";
+import {
+  Cloud,
+  GhostIcon,
+  Loader2,
+  MessageSquare,
+  Plus,
+  Trash,
+} from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import { useState } from "react";
 import { format } from "date-fns";
@@ -34,9 +41,11 @@ const Dashboard = () => {
     <main className="mx-auto max-w-7xl md:p-10">
       <div className="mt-2 flex flex-col items-start justify-between gap-4 borber-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-8 mx-4">
         <div className="sm:text-2lg">
-          <h1 className="mb-3 font-bold text-5xl text-gray-900">Dashboard</h1>
+          <h1 className="mb-3 font-bold text-5xl text-gray-900">
+            <Cloud className="h-6 w-10 text-purple-500 mb-2" /> Dashboard
+          </h1>
           <h2 className="mb-3 font-mono text-gray-900">
-            -- All PDF file history --
+            -- Your PDF file history --
           </h2>
         </div>
         <UploadButton />
@@ -63,7 +72,7 @@ const Dashboard = () => {
                     className="flex flex-col gap-2"
                   >
                     <div className="pt-6 px-6 flex w-full items-center justify-between space-x-6">
-                      <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-r from-purple-500 to-blue-400" />
+                      <div className="h-10 w-10 flex-shrink-0 rounded-xl bg-gradient-to-r from-purple-500 to-blue-400" />
                       <div className="flex-1 truncate">
                         <div className="flex items-center space-x-3">
                           <h3 className="truncate text-lg font-medium text-zinc-900">
