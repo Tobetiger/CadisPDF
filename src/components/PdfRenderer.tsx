@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
+import { ChevronDown, ChevronUp, Loader2, Search } from "lucide-react";
 import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 
@@ -10,12 +10,19 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import SimpleBar from "simplebar-react";
 
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 import { z } from "zod";
 
 import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -27,6 +34,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
   const [numPages, setNumPages] = useState<number>();
   const [curPage, setCurPage] = useState(1);
   const { toast } = useToast();
+  const [scale, setScale] = useState<number>(1);
 
   const CustomPageValidator = z.object({
     page: z
@@ -102,30 +110,60 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
             </p>
           </div>
         </div>
+        <div className="space-x-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="gap-1.5" aria-label="scale" variant="ghost">
+                <Search className="h-4 w-4" />
+                {scale * 100}% <ChevronDown className="h-3 w-3 opacity-50" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem onSelect={() => setScale(1)}>
+                100%
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => setScale(1.5)}>
+                150%
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => setScale(2)}>
+                200%
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => setScale(2.5)}>
+                250%
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
 
       <div className="flex-1 w-full max-h-screen">
-        <div ref={ref}>
-          <Document
-            loading={
-              <div className="flex justify-center">
-                <Loader2 className="my-24 h-6 w-6 animate-spin" />
-              </div>
-            }
-            onLoadError={() => {
-              toast({
-                title: "Cadis was unable to process your PDF",
-                description: "Please try again later",
-                variant: "destructive",
-              });
-            }}
-            onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-            file={url}
-            className="max-h-full"
-          >
-            <Page width={width ? width : 1} pageNumber={curPage} />
-          </Document>
-        </div>
+        <SimpleBar autoHide={false} className="max-h-[calc(100vh-10rem)]">
+          <div ref={ref}>
+            <Document
+              loading={
+                <div className="flex justify-center">
+                  <Loader2 className="my-24 h-6 w-6 animate-spin" />
+                </div>
+              }
+              onLoadError={() => {
+                toast({
+                  title: "Cadis was unable to process your PDF",
+                  description: "Please try again later",
+                  variant: "destructive",
+                });
+              }}
+              onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+              file={url}
+              className="max-h-full"
+            >
+              <Page
+                width={width ? width : 1}
+                pageNumber={curPage}
+                scale={scale}
+              />
+            </Document>
+          </div>
+        </SimpleBar>
       </div>
     </div>
   );
