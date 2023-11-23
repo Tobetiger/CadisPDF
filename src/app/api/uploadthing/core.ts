@@ -3,6 +3,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import {PDFLoader} from "langchain/document_loaders/fs/pdf";
 import {OpenAIEmbeddings} from "langchain/embeddings/openai";
+import {PineconeStore} from "langchain/vectorstores/pinecone";
+import { getPineconeClient } from "@/lib/pinecone";
  
 const f = createUploadthing();
 
@@ -43,8 +45,9 @@ const pagesAmt = pageLevelDocs.length
 
 
  // vectorize and index entire document
- const pinecone = await getPinecone()
- const pineconeIndex = pinecone.Index('cadispdf')
+ 
+ const pinecone = await getPineconeClient()
+ const pineconeIndex = pinecone.Index("cadispdf")
 
  const embeddings = new OpenAIEmbeddings({
    openAIApiKey: process.env.OPENAI_API_KEY,
@@ -61,14 +64,22 @@ const pagesAmt = pageLevelDocs.length
 
  await db.file.update({
    data: {
-     uploadStatus: 'SUCCESS',
+     uploadStatus: "SUCCESS",
    },
    where: {
      id: createdFile.id,
    },
  })
-
+ 
 } catch (err) {
+  await db.file.update({
+    data: {
+      uploadStatus: "FAILED",
+    },
+    where: {
+      id: createdFile.id,
+    },
+  })
 
 }
       
