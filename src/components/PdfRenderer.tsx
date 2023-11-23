@@ -173,8 +173,12 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
           <div ref={ref}>
             <Document
               loading={
-                <div className="flex justify-center">
-                  <Loader2 className="my-24 h-6 w-6 animate-spin" />
+                <div className="flex flex-col items-center gap-2">
+                  <Loader2 className="h-8 w-8 animate-spin text-purple-500" />
+                  <h3 className="font-semibold text-xl">Loading...</h3>
+                  <p className="text-zinc-500 text-sm">
+                    Cadis is processing your PDF.
+                  </p>
                 </div>
               }
               onLoadError={() => {
@@ -205,8 +209,12 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
                 rotate={rotation}
                 key={"@" + scale}
                 loading={
-                  <div className="flex justify-center">
-                    <Loader2 className="my-24 h-6 w-6 animate-spin" />
+                  <div className="flex flex-col items-center gap-2">
+                    <Loader2 className="h-8 w-8 animate-spin text-purple-500" />
+                    <h3 className="font-semibold text-xl">Loading...</h3>
+                    <p className="text-zinc-500 text-sm">
+                      Cadis is processing your PDF.
+                    </p>
                   </div>
                 }
                 onRenderSuccess={() => setRenderedScale(scale)}
