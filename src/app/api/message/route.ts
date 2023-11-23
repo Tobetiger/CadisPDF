@@ -71,7 +71,7 @@ const prevMessages = await db.message.findMany({
   orderBy: {
     createdAt: 'asc',
   },
-  take: 8,
+  take: 6,
 })
 
 const formattedPrevMessages = prevMessages.map((msg) => ({

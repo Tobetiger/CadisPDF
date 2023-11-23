@@ -3,13 +3,7 @@ import React from "react";
 import Messages from "../Chat/Messages";
 import ChatInput from "./ChatInput";
 import { trpc } from "@/app/_trpc/client";
-import {
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-  Loader2,
-  XCircle,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Loader2, XCircle } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import { ChatContextProvider } from "./ChatContext";

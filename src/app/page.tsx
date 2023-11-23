@@ -11,10 +11,10 @@ export default function Home() {
     /* Navbar Styling (WidthWrapper) */
     <>
       <Statusbar />
-      <MaxWidthWrapper className="mb-12 mt-28 sm:mt-40 flex flex-col items-center justify-center text-center">
+      <MaxWidthWrapper className="mb-4 mt-4 sm:mt-20 flex flex-col items-center justify-center text-center">
         <h1 className="max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl">
           Chat With Your{" "}
-          <span className="text-amber-500 border-black ">Documents </span>
+          <span className="text-rose-500 border-black ">_Documents_ </span>
         </h1>
         <p className="mt-5 max-w-prose text-zinc-700 sm:text-md">
           Cadis Allows You To Communicate with Your Files and Documents. Simply
@@ -80,8 +80,8 @@ export default function Home() {
       </div>
 
       {/* Features of Cadis */}
-      <div className="mx-auto mb-32 mt-32 max-w-5xl sm:mt-56">
-        <div className="mb-12 px-6 lg:px-8">
+      <div className="mx-auto mb-32 mt-28 max-w-5xl sm:mt-46">
+        <div className="mb-6 px-6 lg:px-8">
           <div className="mx-auto max-w-2xl sm:text-center">
             <h2 className="mt-2 font-bold text-4xl text-gray-900 sm:text-5xl">
               Start Chatting In Seconds
