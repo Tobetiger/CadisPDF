@@ -28,7 +28,11 @@ export const ourFileRouter = {
       }
     })
 
-    
+    try {
+const response = await fetch(`https://uploadthing-prod.s3.us-west-2.amazonaws.com/${file.key}`)
+} catch (err) {
+
+}
       
     }),
 } satisfies FileRouter;
