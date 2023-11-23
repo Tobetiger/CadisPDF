@@ -5,6 +5,7 @@ import { trpc } from "@/app/_trpc/client";
 import { Loader2, MessageSquare } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import Message from "./Message";
+import { useIntersection } from "@mantine/hooks";
 
 interface MessagesProps {
   fileId: string;
@@ -49,6 +50,12 @@ const Messages = ({ fileId }: MessagesProps) => {
     root: lastMessageRef.current,
     threshold: 1,
   });
+
+  useEffect(() => {
+    if (entry?.isIntersecting) {
+      fetchNextPage();
+    }
+  }, [entry, fetchNextPage]);
 
   useEffect(() => {
     if (entry?.isIntersecting) {

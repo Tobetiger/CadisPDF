@@ -55,17 +55,17 @@ const ChatWrapper = ({ fileId }: ChatWrapperProps) => {
 
   if (data?.status === "FAILED")
     return (
-      <div className="relative min-h-full bg-zinc-50 flex divide-y divide-zinc flex-col justify-between gap-2">
+      <div className="relative min-h-full bg-gray-900 flex divide-y divide-zinc flex-col justify-between gap-2">
         <div className="flex-1 flex justify-center items-center flex-col mb-28">
           <div className="flex flex-col items-center gap-2">
             <XCircle className="h-8 w-8 text-red-500" />
-            <h3 className="font-semibold text-xl">
+            <h3 className="font-semibold text-white text-xl">
               Aw Snap, too many PDF pages...
             </h3>
-            <p className="text-zinc-500 text-sm">
+            <p className="text-zinc-50 text-sm">
               {" "}
-              <span className="font-medium">Free</span> Plan supports up to 5
-              pages per PDF.
+              <span className="font-medium text-zinc-50">Free</span> Plan
+              supports up to 5 pages per PDF.
             </p>
             <div className="flex gap-2">
               <Link
@@ -97,7 +97,7 @@ const ChatWrapper = ({ fileId }: ChatWrapperProps) => {
     <ChatContextProvider fileId={fileId}>
       <div className="relative min-h-full bg-zinc-50 flex divide-y divide-zinc-200 flex-col justify-between gap-2">
         <div className="flex-1 justify-between flex-col mb-28">
-          <Messages />
+          <Messages fileId={fileId} />
         </div>
 
         <ChatInput isDisabled />
