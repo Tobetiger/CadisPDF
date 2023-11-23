@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { SendIcon } from "lucide-react";
+import { ChatContext } from "./ChatContext";
 
 interface ChatInputProps {
   isDisabled?: boolean;
 }
 
 const ChatInput = ({ isDisabled }: ChatInputProps) => {
+  const { addMessage, handleInputChange, isLoading, message } =
+    useContext(ChatContext);
+
   return (
     <div className="absolute bottom-0 left-0 w-full">
       <form className="mx-2 flex flex-row gap-3 md:mx-4 md:mb-6 lg:mx-auto lg:max-w-2xl xl:max-w-3xl">

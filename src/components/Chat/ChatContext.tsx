@@ -48,37 +48,7 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
 
       return response.body;
     },
-  )}
-   
-
-        
-
-        
-
-    
-    onSuccess: async (stream) => {
-      setIsLoading(false);
-
-      if (!stream) {
-        return toast({
-          title: "There was a problem sending this message",
-          description: "Please refresh this page and try again",
-          variant: "destructive",
-        });
-      }
-      const reader = stream.getReader();
-      const decoder = new TextDecoder();
-      let done = false;
-
-      // accumulated response
-      let accResponse = "";
-
-      while (!done) {
-        const { value, done: doneReading } = await reader.read();
-        done = doneReading;
-        const chunkValue = decoder.decode(value);
-
-
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);

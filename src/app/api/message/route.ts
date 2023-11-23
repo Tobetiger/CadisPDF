@@ -7,6 +7,8 @@ import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { PineconeStore } from "langchain/vectorstores/pinecone";
 import { NextRequest } from "next/server";
 
+import {OpenAIStream,StreamingTextResponse} from "ai";
+
 export const POST = async (req: NextRequest) => {
   // this is an endpoint for passing request/question to the pdf file
 
@@ -110,4 +112,20 @@ ${results.map((r) => r.pageContent).join('\n\n')}
 USER INPUT: ${message}`,
     },
   ],
-})}
+  
+})
+const stream = OpenAIStream(response, {
+  async onCompletion(completion) {
+    await db.message.create({
+      data: {
+        text: completion,
+        isUserMessage: false,
+        fileId,
+        userId,
+      },
+    })
+  },
+})
+
+return new StreamingTextResponse(stream)
+}
