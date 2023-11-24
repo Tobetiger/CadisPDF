@@ -94,13 +94,13 @@ const Page = () => {
                 <div
                   key={plan}
                   className={cn("relative rounded-2xl bg-white shadow-lg", {
-                    "border-2 border-blue-600 shadow-blue-200":
+                    "border-2 border-purple-600 shadow-purple-200":
                       plan === "premium",
                     "border border-gray-200": plan !== "premium",
                   })}
                 >
                   {plan === "premium" && (
-                    <div className="absolute -top-5 left-0 right-0 mx-auto w-32 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 px-3 py-2 text-sm font-medium text-white">
+                    <div className="absolute -top-5 left-0 right-0 mx-auto w-32 rounded-full bg-gradient-to-r from-purple-600 to-fuchsia-600 px-3 py-2 text-sm font-medium bg-gray-900 text-white">
                       Upgrade now
                     </div>
                   )}
@@ -138,7 +138,7 @@ const Page = () => {
                           {negative ? (
                             <Minus className="h-6 w-6 text-gray-300" />
                           ) : (
-                            <Check className="h-6 w-6 text-blue-500" />
+                            <Check className="h-6 w-6 text-purple-500" />
                           )}
                         </div>
                         {footnote ? (

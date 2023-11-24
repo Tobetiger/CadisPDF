@@ -5,6 +5,9 @@ import { db } from "@/db";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { INFINITE_QUERY_LIMIT } from "@/config/infinite-query";
+import { PLANS } from "@/config/stripe";
+import { absoluteUrl } from "@/lib/utils";
+import { getUserSubscriptionPlan, stripe } from "@/lib/stripe";
 
 export const appRouter = router({
   authCallback: publicProcedure.query(async () => {
@@ -92,6 +95,66 @@ export const appRouter = router({
         nextCursor,
       };
     }),
+
+
+    createStripeSession: privateProcedure.mutation(
+      async ({ ctx }) => {
+        const { userId } = ctx
+  
+        const billingUrl = absoluteUrl('/dashboard/billing')
+  
+        if (!userId)
+          throw new TRPCError({ code: 'UNAUTHORIZED' })
+  
+        const dbUser = await db.user.findFirst({
+          where: {
+            id: userId,
+          },
+        })
+  
+        if (!dbUser)
+          throw new TRPCError({ code: 'UNAUTHORIZED' })
+  
+        const subscriptionPlan =
+          await getUserSubscriptionPlan()
+  
+        if (
+          subscriptionPlan.isSubscribed &&
+          dbUser.stripeCustomerId
+        ) {
+          const stripeSession =
+            await stripe.billingPortal.sessions.create({
+              customer: dbUser.stripeCustomerId,
+              return_url: billingUrl,
+            })
+  
+          return { url: stripeSession.url }
+        }
+  
+        const stripeSession =
+          await stripe.checkout.sessions.create({
+            success_url: billingUrl,
+            cancel_url: billingUrl,
+            payment_method_types: ['card', 'paypal'],
+            mode: 'subscription',
+            billing_address_collection: 'auto',
+            line_items: [
+              {
+                price: PLANS.find(
+                  (plan) => plan.name === 'Pro'
+                )?.price.priceIds.test,
+                quantity: 1,
+              },
+            ],
+            metadata: {
+              userId: userId,
+            },
+          })
+  
+        return { url: stripeSession.url }
+      }
+    ),
+
 
   getFileUploadStatus: privateProcedure
     .input(z.object({ fileId: z.string() }))

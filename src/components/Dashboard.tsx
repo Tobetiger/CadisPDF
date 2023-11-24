@@ -86,12 +86,12 @@ const Dashboard = () => {
                   <div className="px-6 mt-4 grid grid-cols-3 place-items-center py-2 gap-6 text-xs text-zinc-500">
                     <div className="flex items-center gap-2 ">
                       <Plus className="h-4 w-4" />
-                      {format(new Date(file.createdAt), "MMM yyyy")}
+                      {format(new Date(file.createdAt), "dd MMM yyyy")}
                     </div>
 
                     <div className="flex items-center gap-2">
                       <MessageSquare className="h-4 w-4" />
-                      PDF-File
+                      PDF
                     </div>
 
                     <Button
