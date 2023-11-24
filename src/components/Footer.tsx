@@ -11,7 +11,6 @@ const Footer = () => {
               href="/"
               className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
             >
-              <img src="/cadis1.png" className="h-16" alt="/" />
               <span className="self-center text-2xl font-mono whitespace-nowrap dark:text-white">
                 Tobe-Cadis
                 <span className="text-purple-800 font-bold">PDF</span>

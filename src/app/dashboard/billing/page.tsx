@@ -20,7 +20,7 @@ const Page = async () => {
 
   const subscriptionPlan = await getUserSubscriptionPlan();
 
-  return <Dashboard subscriptionPlan={subscriptionPlan} />;
+  return <Dashboard />;
 };
 
 export default Page;
