@@ -77,8 +77,8 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
   const { width, ref } = useResizeDetector();
 
   return (
-    <div className="w-full bg-white rounded-md shadow flex flex-col items-center">
-      <div className="h-14 w-full border-b border-zinc-200 flex items-center justify-between px-2">
+    <div className="w-full bg-zinc-50 rounded-md shadow flex flex-col items-center">
+      <div className="h-14 w-full border-b border-gray-200 flex items-center justify-between px-2">
         <div className="flex items-center gap-1.5">
           <Button
             disabled={curPage <= 1}
@@ -88,7 +88,6 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
             }}
             variant="ghost"
             aria-label="Previous Page"
-            className="hover:bg-purple-200"
             title="Previous Page"
           >
             <ChevronLeft className="h-4 w-4" />
@@ -165,7 +164,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
             <RotateCw className="h-4 w-4" />
           </Button>
         </div>
-        <PdfFullscreen fileUrl={url} />
+        {/**  <PdfFullscreen fileUrl={url} /> */}
       </div>
 
       <div className="flex-1 w-full max-h-screen">
