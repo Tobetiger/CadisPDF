@@ -3,8 +3,12 @@ import React from "react";
 const Statusbar = () => {
   return (
     <div>
-      <h3 className="text-white bg-purple-700 focus:outline-none focus:ring-4 focus:ring-purple-300   text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-500 dark:hover:bg-purple-700 dark:focus:ring-purple-900 z-40 items-center justify-center font-semibold">
-        Free. No Sign-Up Required. No Limits.
+      <h3
+        className="text-white bg-purple-700 focus:outline-none focus:ring-4 focus:ring-purple-300 
+      text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-500 dark:hover:bg-purple-700
+       dark:focus:ring-purple-900 z-40 items-center justify-center font-semibold"
+      >
+        Free. No Sign-Up Required. Try Now For FREE.
       </h3>
     </div>
   );
