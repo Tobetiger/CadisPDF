@@ -8,7 +8,7 @@ const Statusbar = () => {
       text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-500 dark:hover:bg-purple-700
        dark:focus:ring-purple-900 z-40 items-center justify-center font-semibold"
       >
-        Cadis Gives Your PDF Super-Powers. Try Now For FREE.
+        Cadis Gives Your PDF Super-Powers.
       </h3>
     </div>
   );

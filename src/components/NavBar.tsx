@@ -2,10 +2,18 @@ import React from "react";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
-import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/server";
+import {
+  RegisterLink,
+  LoginLink,
+  getKindeServerSession,
+} from "@kinde-oss/kinde-auth-nextjs/server";
 import { ArrowRight } from "lucide-react";
+import UserAccountNav from "./UserAccountNav";
 
 const NavBar = () => {
+  const { getUser } = getKindeServerSession();
+  const user = getUser();
+
   return (
     <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-300 bg-white bg-blur-lg transition-all pt-4">
       <MaxWidthWrapper>
@@ -20,35 +28,60 @@ const NavBar = () => {
           </Link>
           {/* Todo Mobile NavBar */}
           <div className="hidden items-center space-x-4 sm:flex">
-            <>
-              <Link
-                href="/pricing"
-                className={buttonVariants({
-                  variant: "ghost",
-                  className: "hover:bg-purple-200",
-                  size: "sm",
-                })}
-              >
-                Pricing
-              </Link>
+            {!user ? (
+              <>
+                <Link
+                  href="/pricing"
+                  className={buttonVariants({
+                    variant: "ghost",
+                    className: "hover:bg-purple-200",
+                    size: "sm",
+                  })}
+                >
+                  Pricing
+                </Link>
 
-              <LoginLink
-                className={buttonVariants({
-                  variant: "ghost",
-                  size: "sm",
-                  className: "hover:bg-purple-200",
-                })}
-              >
-                Sign in
-              </LoginLink>
-              <RegisterLink
-                className={buttonVariants({
-                  size: "sm",
-                })}
-              >
-                Get Started <ArrowRight className="ml-1.5 h-5 w-5" />
-              </RegisterLink>
-            </>
+                <LoginLink
+                  className={buttonVariants({
+                    variant: "ghost",
+                    size: "sm",
+                    className: "hover:bg-purple-200",
+                  })}
+                >
+                  Sign in
+                </LoginLink>
+                <RegisterLink
+                  className={buttonVariants({
+                    size: "sm",
+                  })}
+                >
+                  Get Started <ArrowRight className="ml-1.5 h-5 w-5" />
+                </RegisterLink>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/dashboard"
+                  className={buttonVariants({
+                    variant: "ghost",
+                    className: "hover:bg-purple-200",
+                    size: "sm",
+                  })}
+                >
+                  Dashboard
+                </Link>
+
+                <UserAccountNav
+                  name={
+                    !user.given_name || !user.family_name
+                      ? "Your Account"
+                      : `${user.given_name} ${user.family_name}`
+                  }
+                  email={user.email ?? ""}
+                  imageUrl={user.picture ?? ""}
+                />
+              </>
+            )}
           </div>
         </div>
       </MaxWidthWrapper>
