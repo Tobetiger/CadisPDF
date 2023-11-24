@@ -17,7 +17,7 @@ export function absoluteUrl(path: string) {
 
 export function constructMetadata({
   title = "Cadis - the SaaS for students, businesses and everyone",
-  description = "Cadis-PDF is a software that helps make chatting with your PDF files easy.",
+  description = "Cadis-PDF is a saas software that helps make chatting with your PDF files easy.",
   image = "/thumbnail.png",
   icons = "/favicon.ico",
   noIndex = false
@@ -48,7 +48,7 @@ export function constructMetadata({
       creator: "@iamtobe_king"
     },
     icons,
-    metadataBase: new URL('https://cadispdf-jet.vercel.app'),
+    metadataBase: new URL('https://cadis-pdf-mu.vercel.app/'),
     themeColor: '#FFF',
     ...(noIndex && {
       robots: {
