@@ -1,10 +1,11 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import Link from "next/link";
+
 import { ArrowRight } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
 import Statusbar from "@/components/Statusbar";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 export default function Home() {
   return (

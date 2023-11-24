@@ -23,7 +23,7 @@ const NavBar = () => {
             Cadis<span className="font-bold text-purple-700">PDF</span>
           </Link>
 
-          <MobileNav />
+          <MobileNav isAuth={!!user} />
 
           <div className="hidden items-center space-x-4 sm:flex">
             {!user ? (
