@@ -28,7 +28,10 @@ const Footer = () => {
               </li>
 
               <li>
-                <a href="#" className="hover:underline me-4 md:me-6">
+                <a
+                  href="https://cadis-pdf-mu.vercel.app/pricing"
+                  className="hover:underline me-4 md:me-6"
+                >
                   Pricing
                 </a>
               </li>

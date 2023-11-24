@@ -13,12 +13,12 @@ export const PLANS = [
     },
   },
   {
-    name: 'Premium',
-    slug: 'Premium',
+    name: 'premium',
+    slug: 'premium',
     quota: 50,
     pagesPerPdf: 25,
     price: {
-      amount: 14,
+      amount: 8,
       priceIds: {
         test: 'price_1OFwWWHhjzlnWw2aX0ME7FJy',
         production: '',
