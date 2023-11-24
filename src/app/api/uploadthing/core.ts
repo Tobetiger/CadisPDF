@@ -58,7 +58,6 @@ const pagesAmt = pageLevelDocs.length
    embeddings,
    {
      pineconeIndex,
-     
    }
  )
 
