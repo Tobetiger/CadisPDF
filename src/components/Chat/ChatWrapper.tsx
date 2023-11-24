@@ -58,7 +58,7 @@ const ChatWrapper = ({ fileId }: ChatWrapperProps) => {
       <div className="relative min-h-full bg-gray-900 flex divide-y divide-zinc flex-col justify-between gap-2">
         <div className="flex-1 flex justify-center items-center flex-col mb-28">
           <div className="flex flex-col items-center gap-2">
-            <XCircle className="h-8 w-8 text-red-500" />
+            <XCircle className="h-8 w-8 mt-20 text-red-500" />
             <h3 className="font-semibold text-white text-xl">
               Aw Snap, too many PDF pages...
             </h3>
