@@ -76,6 +76,7 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
                     Dashboard
                   </Link>
                 </li>
+
                 <li className="my-3 h-px w-full bg-gray-300" />
                 <li>
                   <Link
@@ -86,6 +87,7 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
                     Pricing
                   </Link>
                 </li>
+
                 <li className="my-3 h-px w-full bg-gray-300" />
                 <li>
                   <Link
