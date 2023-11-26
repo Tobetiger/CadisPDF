@@ -39,9 +39,9 @@ const ChatInput = ({ isDisabled }: ChatInputProps) => {
                 className="resize-none pr-12 text-base py-3 scrollbar-thumb-purple scrollbar-thumb-rounded scrollbar-track-purple-lighter scrollbar-w-2 scrolling-touch border-purple-400"
               />
               <Button
-                disabled={isLoading || isDisabled}
                 className="absolute bottom-1.5 right-[8px]"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   addMessage(), textareaRef.current?.focus();
                 }}
               >
