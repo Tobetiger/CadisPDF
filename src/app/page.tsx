@@ -6,6 +6,8 @@ import Image from "next/image";
 import Statusbar from "@/components/Statusbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import previewImg from "@/public/previewImg.jpg";
+import uploadPreview from "@/public/uploadPreview.jpg";
 
 export default function Home() {
   return (
@@ -54,7 +56,7 @@ export default function Home() {
             <div className="mt-16 flow-root sm:mt-24">
               <div className="-m-2 rounded-xl bg-gray-800/5 p-2 ring-2 ring-inset ring-gray-800/10 lg:-m-4 lg:rounded-2xl lg:p-4">
                 <Image
-                  src="/dashboard-preview.jpg"
+                  src={previewImg.src}
                   alt="productDemo preview"
                   width={1364}
                   height={866}
@@ -147,7 +149,7 @@ export default function Home() {
           <div className="mt-16 flow-root sm:mt-24">
             <div className="-m-2 rounded-xl bg-gray-800/5 p-2 ring-2 ring-inset ring-gray-800/10 lg:-m-4 lg:rounded-2xl lg:p-4">
               <Image
-                src="/file-upload-preview.jpg"
+                src={uploadPreview.src}
                 alt="fileUpload preview"
                 width={1419}
                 height={732}
